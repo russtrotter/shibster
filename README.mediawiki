@@ -1,0 +1,86 @@
+== What is it? ==
+
+Shibster is a little Java servlet filter that you can run in your container to present HTTP headers to your downstream web applications to make it look to them like you've authenticated against a Shibboleth IdP.
+
+== Building ==
+
+ mvn clean install
+
+== Installing it ==
+
+Shibster is simply a Java Servlet 2.3+ filter so it can be integrated in any multitude of ways, but it's often convenient to keep a development tool like this out of your production code.
+
+==== Container-Wide ====
+
+Apache Tomcat 6.x+ has a global web.xml configuration that all running web applications share.
+
+# Copy the jar
+ mkdir $CATALINA_BASE/lib
+ cp target/shibster-0.0.1-SNAPSHOT.jar $CATALINA_BASE/lib
+
+# Wire in the filter
+ edit $CATALINA_BASE/conf/web.xml, see "Configuration" below
+
+==== Single Application ====
+
+# Copy the jar
+ cp target/shibster-0.0.1-SNAPSHOT.jar .../myapp/WEB-INF/lib
+ edit .../myapp/WEB-INF/web, see "Configuration" below
+
+== Configuration ==
+The following summarizes the filter init-param's that can be configured:
+||Parameter||Description||Required||Default||
+|contexts|Specifies the servlet context root paths that shibster is active|Yes|None|
+|headers|Specifies the HTTP headers to pass to the downstream application.  The syntax is standard Java properties-based. The property "REMOTE_USER" in this data is treated specially and stored in both the HTTP header as well as the return of the javax.servlet.ServletRequest.getRemoteUser() API call.|Yes|None|
+
+
+==== Example Configuration ====
+
+The following example is used in front of a uPortal instance that is wired up for Shibboleth authentication
+
+ <nowiki>
+<filter>
+        <filter-name>shibster</filter-name>
+        <filter-class>net.unicon.shibster.web.Filter</filter-class>
+        <init-param>
+                <param-name>contexts</param-name>
+                <param-value>/uPortal</param-value>
+        </init-param>
+        <init-param>
+                <param-name>headers</param-name>
+                <param-value>
+uid=abcd1234
+eppn=
+affiliation=
+entitlement=
+assurance=
+displayName=Jane Smith
+eduPersonAffiliation=student
+email=smith@unicon.net
+telephoneNumber=123-123-1234
+cccEduMainPhoneExtension=123
+cccEduMainPhoneAuth=N
+cccEduSecondPhone=456-456-4567
+cccEduSecondPhoneExtension=456
+cccEduSecondPhoneAuth=N
+cccEduBirthDate=1950-01-02
+cccEduHasSSN=f
+cccEduFirstName=Jane
+cccEduMiddleName=
+cccEduLastName=Smith
+cccEduSuffix=
+cccEduOtherFirstname=
+cccEduOtherMiddleName=
+cccEduOtherlastName=Smith
+cccEduStreetAddress1=123 Main St
+cccEduStreetAddress2=
+cccEduCity=Beverly Hills
+cccEduState=CA
+cccEduNonUsaProvince=
+cccEduPostalCode=90210
+cccEduCountry=
+REMOTE_USER=abcd1234
+                </param-value>
+        </init-param>
+   </filter>
+</nowiki>
