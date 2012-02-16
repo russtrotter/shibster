@@ -39,8 +39,8 @@ The following summarizes the filter init-param's that can be configured:
 The following example is used in front of a uPortal instance that is wired up for Shibboleth authentication
 
 <pre>
-  <filter><br />
-        <filter-name>shibster</filter-name><br />
+  <filter>
+        <filter-name>shibster</filter-name>
         <filter-class>net.unicon.shibster.web.Filter</filter-class><br />
         <init-param>
                 <param-name>contexts</param-name>
