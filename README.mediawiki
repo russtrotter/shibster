@@ -38,8 +38,7 @@ The following summarizes the filter init-param's that can be configured:
 
 The following example is used in front of a uPortal instance that is wired up for Shibboleth authentication
 
-<xmlcode>
-<filter>
+ <filter>
         <filter-name>shibster</filter-name>
         <filter-class>net.unicon.shibster.web.Filter</filter-class>
         <init-param>
@@ -49,38 +48,37 @@ The following example is used in front of a uPortal instance that is wired up fo
         <init-param>
                 <param-name>headers</param-name>
                 <param-value>
-uid=abcd1234
-eppn=
-affiliation=
-entitlement=
-assurance=
-displayName=Jane Smith
-eduPersonAffiliation=student
-email=smith@unicon.net
-telephoneNumber=123-123-1234
-cccEduMainPhoneExtension=123
-cccEduMainPhoneAuth=N
-cccEduSecondPhone=456-456-4567
-cccEduSecondPhoneExtension=456
-cccEduSecondPhoneAuth=N
-cccEduBirthDate=1950-01-02
-cccEduHasSSN=f
-cccEduFirstName=Jane
-cccEduMiddleName=
-cccEduLastName=Smith
-cccEduSuffix=
-cccEduOtherFirstname=
-cccEduOtherMiddleName=
-cccEduOtherlastName=Smith
-cccEduStreetAddress1=123 Main St
-cccEduStreetAddress2=
-cccEduCity=Beverly Hills
-cccEduState=CA
-cccEduNonUsaProvince=
-cccEduPostalCode=90210
-cccEduCountry=
-REMOTE_USER=abcd1234
+ uid=abcd1234
+ eppn=
+ affiliation=
+ entitlement=
+ assurance=
+ displayName=Jane Smith
+ eduPersonAffiliation=student
+ email=smith@unicon.net
+ telephoneNumber=123-123-1234
+ cccEduMainPhoneExtension=123
+ cccEduMainPhoneAuth=N
+ cccEduSecondPhone=456-456-4567
+ cccEduSecondPhoneExtension=456
+ cccEduSecondPhoneAuth=N
+ cccEduBirthDate=1950-01-02
+ cccEduHasSSN=f
+ cccEduFirstName=Jane
+ cccEduMiddleName=
+ cccEduLastName=Smith
+ cccEduSuffix=
+ cccEduOtherFirstname=
+ cccEduOtherMiddleName=
+ cccEduOtherlastName=Smith
+ cccEduStreetAddress1=123 Main St
+ cccEduStreetAddress2=
+ cccEduCity=Beverly Hills
+ cccEduState=CA
+ cccEduNonUsaProvince=
+ cccEduPostalCode=90210
+ cccEduCountry=
+ REMOTE_USER=abcd1234
                 </param-value>
         </init-param>
    </filter>
-</xmlcode>
