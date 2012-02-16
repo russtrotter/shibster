@@ -41,7 +41,7 @@ The following example is used in front of a uPortal instance that is wired up fo
 <pre>
   <filter>
         <filter-name>shibster</filter-name>
-        <filter-class>net.unicon.shibster.web.Filter</filter-class><br />
+        <filter-class>net.unicon.shibster.web.Filter</filter-class>
         <init-param>
                 <param-name>contexts</param-name>
                 <param-value>/uPortal</param-value>
