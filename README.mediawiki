@@ -38,7 +38,7 @@ The following summarizes the filter init-param's that can be configured:
 
 The following example is used in front of a uPortal instance that is wired up for Shibboleth authentication
 
-<pre>
+<xmlcode>
 <filter>
         <filter-name>shibster</filter-name>
         <filter-class>net.unicon.shibster.web.Filter</filter-class>
@@ -83,4 +83,4 @@ REMOTE_USER=abcd1234
                 </param-value>
         </init-param>
    </filter>
-</pre>
+</xmlcode>
