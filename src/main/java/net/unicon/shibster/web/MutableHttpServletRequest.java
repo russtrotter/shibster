@@ -27,6 +27,14 @@ public class MutableHttpServletRequest extends HttpServletRequestWrapper {
 
 	public MutableHttpServletRequest(HttpServletRequest request) {
 		super(request);
+		Enumeration<?> names = request.getHeaderNames();
+		while (names.hasMoreElements()) {
+			String name = names.nextElement().toString();
+			Enumeration<?> values = request.getHeaders(name);
+			while (values.hasMoreElements()) {
+				addHeader(name, values.nextElement().toString());
+			}
+		}
 	}
 
 	@Override
@@ -42,7 +50,7 @@ public class MutableHttpServletRequest extends HttpServletRequestWrapper {
 	public long getDateHeader(String name) {
 		String v = getHeader(name);
 		if (v == null) {
-			return -1L;
+			return -1;
 		}
 		for (DateFormat df : dateFormats) {
 			try {
@@ -54,17 +62,21 @@ public class MutableHttpServletRequest extends HttpServletRequestWrapper {
 		}
 		throw new IllegalArgumentException("Unhandled date format: " + v);
 	}
+	
+	private static String normalize(String name) {
+		return name != null ? name.toLowerCase() : null;
+	}
 
 	@Override
 	public String getHeader(String name) {
-		List<String> list = headers.get(name);
+		List<String> list = headers.get(normalize(name));
 		return (list != null && list.size() > 0) ? list.get(0) : null;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Enumeration getHeaders(String name) {
-		List<String> list = headers.get(name);
+		List<String> list = headers.get(normalize(name));
 		if (list == null) {
 			list = Collections.emptyList();
 		}
@@ -84,6 +96,7 @@ public class MutableHttpServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public void addHeader(String name, String value) {
+		name = normalize(name);
 		List<String> list = headers.get(name);
 		if (list == null) {
 			list = new ArrayList<String>();
